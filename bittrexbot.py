@@ -14,8 +14,8 @@ import sys, os
 #{ EDITABLE VARs
 
 
-apikey='808ec1cdd703409281e843dd5b5fe231'
-apisecret='2da9b297e2c149b282b77308282cc47c'
+apikey=''
+apisecret=''
 
 #Wait for order completion (1 for true, 0 for false)
 orderwait = 1
