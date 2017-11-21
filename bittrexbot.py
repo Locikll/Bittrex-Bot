@@ -18,21 +18,25 @@ apikey=''
 apisecret=''
 
 #Wait for order completion (1 for true, 0 for false)
-orderwait = 1
+orderwait = 0
+
+#Retention based ROI (1 for true, 0 for false)
+retentionROI = 1
+
 
 #Bid and Ask Fees are both 0.25% commission.
 bidFee = 0.0025
 askFee = 0.0025
 
-#Amount Retained (%), 0.1 = 10% (BASE LINE for Currencies Not in the specified dictionary)
-retainednorm = 0.1 
+#Amount Retained (%), 0.01 = 1% (BASE LINE for Currencies Not in the specified dictionary)
+retainednorm = 0.01
 
 #Retain specific currencies at different rates, adding new currencies by retainspec['CURRENCY'] = value
 retainspec = OrderedDict()
 retainspec['STEEM'] = 0.02
 
 #Return on Investment desired, 1.3 = 30% ROI
-ROI = 1.3  
+ROI = 1.3
 
 SelltoCurrency = 'BTC'
 
@@ -101,7 +105,12 @@ def mainrun():
             retained = retainspec[Currency]
         else:
             retained = retainednorm
-
+        
+        if retentionROI == 1:
+            ROI = 1.00 + retained + retained**2 + retained**3 + retained**4
+        else:
+            ROI = ROI
+        
       
         if Currency in remaining.keys():
             CurrencyHold = remaining[Currency]
